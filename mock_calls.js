@@ -5,9 +5,11 @@ class MockedFunction  {
     }
     matchWith() {
         this.args = arguments
+        return this
     }
     respondWith(ouput) {
         this.output = output
+        return this
     }
     startMocking() {
         this.cb = function(){
@@ -33,6 +35,7 @@ class MockedFunction  {
                 }
             })
         })
+        return this
     }
     filterMatchArguments(args) {
         for(var i = 0;i<args.length;i++) {
@@ -50,6 +53,7 @@ class MockedFunction  {
               }
           })
         })
+        return this
     }
     sendErrorResponse(errObj) {
         this.promiseFn = () => new Promise((resolve,reject)=>{
@@ -61,8 +65,9 @@ class MockedFunction  {
               }
           })
         })
+        return this
     }
 }
 const mock = (cb) => {
-    return new MockedFunction()
+    return new MockedFunction(cb)
 }
