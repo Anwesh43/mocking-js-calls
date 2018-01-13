@@ -7,7 +7,7 @@ class MockedFunction  {
         this.args = arguments
         return this
     }
-    respondWith(ouput) {
+    respondWith(output) {
         this.output = output
         return this
     }
@@ -24,6 +24,7 @@ class MockedFunction  {
             }
             console.log(`${this.cb.name} is mocked`)
         }
+        return this.cb.bind(this)
     }
     sendJsonResponse(jsonObj) {
         this.promiseFn = () => new Promise((resolve,reject)=>{
@@ -39,7 +40,9 @@ class MockedFunction  {
     }
     filterMatchArguments(args) {
         for(var i = 0;i<args.length;i++) {
-            return this.args[i] != args[i]
+            if(args[i] != this.args[i]) {
+                return false
+            }
         }
         return true
     }
