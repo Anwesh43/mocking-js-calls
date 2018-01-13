@@ -63,3 +63,6 @@ class MockedFunction  {
         })
     }
 }
+const mock = (cb) => {
+    return new MockedFunction()
+}
